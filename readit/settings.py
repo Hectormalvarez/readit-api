@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,7 +83,6 @@ DATABASES = {
     }
 }
 
-# custom user model
 AUTH_USER_MODEL = "books.CustomUser"
 
 # Password validation
@@ -108,6 +108,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1),
+    "USER_ID_CLAIM": "id",
+}
 
 TIME_ZONE = "UTC"
 

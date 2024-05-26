@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from books.urls import urlpatterns as books_urls
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
+] + books_urls
